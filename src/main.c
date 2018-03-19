@@ -4,7 +4,7 @@
 #include "stm32f0xx_ll_system.h"
 #include "stm32f0xx_ll_exti.h"
 
-char current_digits[4] = {1, 9, 3, 7};
+char current_digits[4] = {0, 0, 0, 0};
 char show_dot = 0;
 
 const int digits[10] = {0b11101011, 0b10001000, 0b10110011, 0b10111010, 0b11011000, 0b01111010, 0b01111011, 0b10101000, 0b11111011, 0b11111010, 0};
