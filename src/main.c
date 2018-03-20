@@ -3,10 +3,11 @@
 #include "stm32f0xx_ll_rcc.h"
 #include "stm32f0xx_ll_system.h"
 #include "stm32f0xx_ll_exti.h"
-#define USE_FULL_LL_DRIVER
 
-char current_digits[4] = {1, 9, 3, 8};
-char show_dot = 0;
+char current_digits[4] = {0, 0, 0, 0};
+char visible[4] = {1, 1, 1, 1};
+char beaming = 0;
+char show_dot2 = 1;
 
 const int digits[10] = {0b11101011, 0b10001000, 0b10110011, 0b10111010, 0b11011000, 0b01111010, 0b01111011, 0b10101000, 0b11111011, 0b11111010, 0};
 void SystemClock_Config(void);
@@ -43,7 +44,7 @@ void display_dot1()
 }
 void display_dot2()
 {
-	if (show_dot)
+	if (show_dot2)
 		LL_GPIO_WriteOutputPort(GPIOB, 0b101100000100);
 	else
 		LL_GPIO_WriteOutputPort(GPIOB, 0b101100000000);
@@ -190,19 +191,22 @@ void SysTick_Handler(void) {
         tick++;
         time++;
         sec++;
-        if (tick == count)
+        
+        
+        
+        if (tick == count && visible[0])
         {
 			display_digit1(current_digits[0]);
         }
-        else if (tick == 2*count)
+        else if (tick == 2*count && visible[1])
         {
 			display_digit2(current_digits[1]);
 		}
-		else if (tick == 3*count)
+		else if (tick == 3*count && visible[2])
 		{
 			display_digit3(current_digits[2]);
 		}
-		else if (tick == 4*count)
+		else if (tick == 4*count && visible[3])
 		{
 			display_digit4(current_digits[3]);
 		}
@@ -241,31 +245,84 @@ void SysTick_Handler(void) {
 		if (sec == 1000)
 		{
 			sec = 0;
-			show_dot++;
-			show_dot %= 2;
+			show_dot2++;
+			show_dot2 %= 2;
+			
+			
 		}
 		
+		if (sec == 500)
+			{
+				switch (beaming)
+				{
+					case 1: { visible[0]++; visible[0] %= 2; break;}
+					case 2: { visible[1]++; visible[1] %= 2; break;}
+					case 3: { visible[2]++; visible[2] %= 2; break;}
+					case 4: { visible[3]++; visible[3] %= 2; break;}
+					default: break;
+				}
+			}
+		
+		
 }
+
 
 //button interrupt handler
 void EXTI0_1_IRQHandler(void)
 {
-        LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_8);
-        //~ LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_9);
-        //don't forget to add this line at the end
-        LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);
+	
+	switch (beaming)
+	{
+		case 1:
+		{
+			current_digits[0]++;
+			current_digits[0] %= 10;
+			break;
+		}
+		case 2:
+		{
+			current_digits[1]++;
+			current_digits[1] %= 10;
+			break;
+		}
+		case 3:
+		{
+			current_digits[2]++;
+			current_digits[2] %= 7;
+			break;
+		}
+		case 4:
+		{
+			current_digits[3]++;
+			current_digits[3] %= 10;
+			break;
+		}
+		default: break;
+		
+	}
+	
+	
+	//~ LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_8);
+	//don't forget to add this line at the end
+	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);
+	
+	
 }
 
-int t = 0;
 void EXTI2_3_IRQHandler(void)
 {
-	if (t > 2000)
-	{
-        //~ LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_8);
-        LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_9);
-        //~ //don't forget to add this line at the end
-        LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_2);
-        t = 0;
-	}
-	t++;
+	//~ LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_9);
+	//don't forget to add this line at the end
+	
+	
+	beaming++;
+	beaming %= 6;
+	visible[0] = 1;
+	visible[1] = 1;
+	visible[2] = 1;
+	visible[3] = 1;
+	
+	//~ SysTick_Handler();
+	//~ beaming %= 6;
+	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_2);
 }
