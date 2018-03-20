@@ -372,6 +372,8 @@ AlarmMask	./stm32f0_peripheral/Inc/stm32f0xx_ll_rtc.h	183;"	member	struct:__anon
 AlarmTime	./stm32f0_peripheral/Inc/stm32f0xx_ll_rtc.h	181;"	member	struct:__anon9
 ALRMAR	./includes/stm32f051x8.h	409;"	member	struct:__anon47
 ALRMASSR	./includes/stm32f051x8.h	419;"	member	struct:__anon47
+Alternate	./includes/stm32f0xx_ll_gpio.h	105;"	member	struct:__anon67
+Alternate	./src/main.c	16;"	member	struct:__anon68	file:
 Alternate	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	105;"	member	struct:__anon25
 AnalogFilter	./stm32f0_peripheral/Inc/stm32f0xx_ll_i2c.h	96;"	member	struct:__anon2
 APB1CLKDivider	./stm32f0_peripheral/Inc/stm32f0xx_ll_utils.h	140;"	member	struct:__anon17
@@ -726,6 +728,7 @@ CONTROL_SPSEL_Msk	./includes/core_cm0.h	346;"	macro
 CONTROL_SPSEL_Pos	./includes/core_cm0.h	345;"	macro
 CONTROL_Type	./includes/core_cm0.h	342;"	typedef	typeref:union:__anon62
 CopyDataInit	./src/startup_stm32f051x8.s	36;"	label
+count	./src/main.c	200;"	variable
 CounterMode	./stm32f0_peripheral/Inc/stm32f0xx_ll_tim.h	204;"	member	struct:__anon10
 CPAR	./includes/stm32f051x8.h	250;"	member	struct:__anon36
 CPUID	./includes/core_cm0.h	390;"	member	struct:__anon65
@@ -780,6 +783,7 @@ CSR	./includes/stm32f051x8.h	194;"	member	struct:__anon32
 CSR	./includes/stm32f051x8.h	372;"	member	struct:__anon45
 CSR	./includes/stm32f051x8.h	390;"	member	struct:__anon46
 CTRL	./includes/core_cm0.h	497;"	member	struct:__anon66
+current_digits	./src/main.c	20;"	variable
 DAC	./includes/stm32f051x8.h	617;"	macro
 DAC1	./includes/stm32f051x8.h	616;"	macro
 DAC_BASE	./includes/stm32f051x8.h	557;"	macro
@@ -935,15 +939,23 @@ DeadTime	./stm32f0_peripheral/Inc/stm32f0xx_ll_tim.h	416;"	member	struct:__anon1
 DEBUG_OPTIMIZE_FLAGS	./Makefile	54;"	macro
 Default_Handler	./src/startup_stm32f051x8.s	81;"	label
 DEFINES	./Makefile	31;"	macro
-delay	./src/main.c	26;"	function	signature:(void)
-delay	./src/main.c	7;"	prototype	file:	signature:(void)
 DHR12L1	./includes/stm32f051x8.h	222;"	member	struct:__anon34
 DHR12R1	./includes/stm32f051x8.h	221;"	member	struct:__anon34
 DHR8R1	./includes/stm32f051x8.h	223;"	member	struct:__anon34
 DIER	./includes/stm32f051x8.h	454;"	member	struct:__anon49
 DigitalFilter	./stm32f0_peripheral/Inc/stm32f0xx_ll_i2c.h	101;"	member	struct:__anon2
+digits	./src/main.c	23;"	variable
 Direction	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	121;"	member	struct:__anon23
 DISABLE	./includes/stm32f0xx.h	183;"	enumerator	enum:__anon54
+Disassembly	./temp.asm	24;"	label
+display_digit1	./src/main.c	36;"	function	signature:(char the_digit)
+display_digit2	./src/main.c	40;"	function	signature:(char the_digit)
+display_digit3	./src/main.c	44;"	function	signature:(char the_digit)
+display_digit4	./src/main.c	48;"	function	signature:(char the_digit)
+display_dot1	./src/main.c	52;"	function
+display_dot2	./src/main.c	56;"	function
+display_dot3	./src/main.c	63;"	function
+display_dot4	./src/main.c	67;"	function
 DMA1	./includes/stm32f051x8.h	636;"	macro
 DMA1_BASE	./includes/stm32f051x8.h	575;"	macro
 DMA1_Ch1_IRQHandler	./includes/stm32f051x8.h	6767;"	macro
@@ -1165,9 +1177,13 @@ ERROR	./includes/stm32f0xx.h	190;"	enumerator	enum:__anon55
 ErrorStatus	./includes/stm32f0xx.h	192;"	typedef	typeref:enum:__anon55
 EXAMPLES	./Makefile	5;"	macro
 EXTI	./includes/stm32f051x8.h	624;"	macro
-EXTI0_1_IRQHandler	./examples/EXTI_PA0_button.c	110;"	function	signature:(void)
 EXTI0_1_IRQHandler	./examples/EXTI_PA0_button.c	8;"	prototype	file:	signature:(void)
+EXTI0_1_IRQHandler	./src/main.c	25;"	prototype	file:	signature:(void)
+EXTI0_1_IRQHandler	./src/main.c	263;"	function	signature:(void)
 EXTI0_1_IRQn	./includes/stm32f051x8.h	99;"	enumerator	enum:__anon26
+EXTI0_IRQHandler	./examples/EXTI_PA0_button.c	121;"	function	signature:(void)
+EXTI1_1_IRQHandler	./src/main.c	271;"	function	signature:(void)
+EXTI1_IRQHandler	./examples/EXTI_PA0_button.c	129;"	function	signature:(void)
 EXTI2_3_IRQn	./includes/stm32f051x8.h	100;"	enumerator	enum:__anon26
 EXTI4_15_IRQn	./includes/stm32f051x8.h	101;"	enumerator	enum:__anon26
 EXTICR	./includes/stm32f051x8.h	329;"	member	struct:__anon42
@@ -2391,9 +2407,9 @@ GPIO_PUPDR_PUPDR9_Pos	./includes/stm32f051x8.h	2646;"	macro
 GPIO_TypeDef	./includes/stm32f051x8.h	319;"	typedef	typeref:struct:__anon41
 GTPR	./includes/stm32f051x8.h	505;"	member	struct:__anon51
 g_pfnVectors	./src/startup_stm32f051x8.s	97;"	label
-HardFault_Handler	./examples/EXTI_PA0_button.c	87;"	function	signature:(void)
+HardFault_Handler	./examples/EXTI_PA0_button.c	99;"	function	signature:(void)
 HardFault_Handler	./examples/USART_TX.c	166;"	function	signature:(void)
-HardFault_Handler	./src/main.c	86;"	function	signature:(void)
+HardFault_Handler	./src/main.c	188;"	function	signature:(void)
 HardFault_IRQn	./includes/stm32f051x8.h	88;"	enumerator	enum:__anon26
 HardwareFlowControl	./stm32f0_peripheral/Inc/stm32f0xx_ll_usart.h	113;"	member	struct:__anon3
 HCLK_Frequency	./stm32f0_peripheral/Inc/stm32f0xx_ll_rcc.h	107;"	member	struct:__anon1
@@ -2406,6 +2422,7 @@ HSI48_VALUE	./src/system_stm32f0xx.c	52;"	macro	file:
 HSI48_VALUE	./stm32f0_peripheral/Inc/stm32f0xx_ll_rcc.h	149;"	macro
 HSI_VALUE	./src/system_stm32f0xx.c	47;"	macro	file:
 HSI_VALUE	./stm32f0_peripheral/Inc/stm32f0xx_ll_rcc.h	136;"	macro
+i	./src/main.c	200;"	variable
 I2C1	./includes/stm32f051x8.h	613;"	macro
 I2C1_BASE	./includes/stm32f051x8.h	554;"	macro
 I2C1_IRQn	./includes/stm32f051x8.h	116;"	enumerator	enum:__anon26
@@ -2702,6 +2719,7 @@ ICSR	./includes/core_cm0.h	391;"	member	struct:__anon65
 IDCODE	./includes/stm32f051x8.h	236;"	member	struct:__anon35
 IDR	./includes/stm32f051x8.h	204;"	member	struct:__anon33
 IDR	./includes/stm32f051x8.h	313;"	member	struct:__anon41
+Idx	./temp.asm	5;"	label
 IER	./includes/stm32f051x8.h	144;"	member	struct:__anon27
 IER	./includes/stm32f051x8.h	174;"	member	struct:__anon29
 IER	./includes/stm32f051x8.h	480;"	member	struct:__anon50
@@ -3823,77 +3841,147 @@ LL_GetFlashSize	./stm32f0_peripheral/Inc/stm32f0xx_ll_utils.h	213;"	function	sig
 LL_GetUID_Word0	./stm32f0_peripheral/Inc/stm32f0xx_ll_utils.h	184;"	function	signature:(void)
 LL_GetUID_Word1	./stm32f0_peripheral/Inc/stm32f0xx_ll_utils.h	193;"	function	signature:(void)
 LL_GetUID_Word2	./stm32f0_peripheral/Inc/stm32f0xx_ll_utils.h	202;"	function	signature:(void)
+LL_GPIO_AF_0	./includes/stm32f0xx_ll_gpio.h	196;"	macro
 LL_GPIO_AF_0	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	196;"	macro
+LL_GPIO_AF_1	./includes/stm32f0xx_ll_gpio.h	197;"	macro
 LL_GPIO_AF_1	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	197;"	macro
+LL_GPIO_AF_2	./includes/stm32f0xx_ll_gpio.h	198;"	macro
 LL_GPIO_AF_2	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	198;"	macro
+LL_GPIO_AF_3	./includes/stm32f0xx_ll_gpio.h	199;"	macro
 LL_GPIO_AF_3	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	199;"	macro
+LL_GPIO_AF_4	./includes/stm32f0xx_ll_gpio.h	200;"	macro
 LL_GPIO_AF_4	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	200;"	macro
+LL_GPIO_AF_5	./includes/stm32f0xx_ll_gpio.h	201;"	macro
 LL_GPIO_AF_5	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	201;"	macro
+LL_GPIO_AF_6	./includes/stm32f0xx_ll_gpio.h	202;"	macro
 LL_GPIO_AF_6	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	202;"	macro
+LL_GPIO_AF_7	./includes/stm32f0xx_ll_gpio.h	203;"	macro
 LL_GPIO_AF_7	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	203;"	macro
+LL_GPIO_DeInit	./includes/stm32f0xx_ll_gpio.h	927;"	prototype	signature:(GPIO_TypeDef *GPIOx)
 LL_GPIO_DeInit	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	927;"	prototype	signature:(GPIO_TypeDef *GPIOx)
 LL_GPIO_DeInit	./stm32f0_peripheral/Src/stm32f0xx_ll_gpio.c	111;"	function	signature:(GPIO_TypeDef *GPIOx)
+LL_GPIO_GetAFPin_0_7	./includes/stm32f0xx_ll_gpio.h	582;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
 LL_GPIO_GetAFPin_0_7	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	582;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
+LL_GPIO_GetAFPin_8_15	./includes/stm32f0xx_ll_gpio.h	644;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
 LL_GPIO_GetAFPin_8_15	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	644;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
+LL_GPIO_GetPinMode	./includes/stm32f0xx_ll_gpio.h	318;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
 LL_GPIO_GetPinMode	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	318;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
+LL_GPIO_GetPinOutputType	./includes/stm32f0xx_ll_gpio.h	386;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
 LL_GPIO_GetPinOutputType	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	386;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
+LL_GPIO_GetPinPull	./includes/stm32f0xx_ll_gpio.h	522;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
 LL_GPIO_GetPinPull	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	522;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
+LL_GPIO_GetPinSpeed	./includes/stm32f0xx_ll_gpio.h	457;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
 LL_GPIO_GetPinSpeed	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	457;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin)
+LL_GPIO_Init	./includes/stm32f0xx_ll_gpio.h	928;"	prototype	signature:(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStruct)
 LL_GPIO_Init	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	928;"	prototype	signature:(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStruct)
 LL_GPIO_Init	./stm32f0_peripheral/Src/stm32f0xx_ll_gpio.c	172;"	function	signature:(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStruct)
+LL_GPIO_InitTypeDef	./includes/stm32f0xx_ll_gpio.h	109;"	typedef	typeref:struct:__anon67
+LL_GPIO_InitTypeDef	./src/main.c	17;"	typedef	typeref:struct:__anon68	file:
 LL_GPIO_InitTypeDef	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	109;"	typedef	typeref:struct:__anon25
+LL_GPIO_IsAnyPinLocked	./includes/stm32f0xx_ll_gpio.h	726;"	function	signature:(GPIO_TypeDef *GPIOx)
 LL_GPIO_IsAnyPinLocked	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	726;"	function	signature:(GPIO_TypeDef *GPIOx)
+LL_GPIO_IsInputPinSet	./includes/stm32f0xx_ll_gpio.h	774;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
 LL_GPIO_IsInputPinSet	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	774;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+LL_GPIO_IsOutputPinSet	./includes/stm32f0xx_ll_gpio.h	826;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
 LL_GPIO_IsOutputPinSet	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	826;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+LL_GPIO_IsPinLocked	./includes/stm32f0xx_ll_gpio.h	715;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
 LL_GPIO_IsPinLocked	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	715;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+LL_GPIO_LockPin	./includes/stm32f0xx_ll_gpio.h	681;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
 LL_GPIO_LockPin	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	681;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+LL_GPIO_MODE_ALTERNATE	./includes/stm32f0xx_ll_gpio.h	155;"	macro
 LL_GPIO_MODE_ALTERNATE	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	155;"	macro
+LL_GPIO_MODE_ANALOG	./includes/stm32f0xx_ll_gpio.h	156;"	macro
 LL_GPIO_MODE_ANALOG	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	156;"	macro
+LL_GPIO_MODE_INPUT	./includes/stm32f0xx_ll_gpio.h	153;"	macro
 LL_GPIO_MODE_INPUT	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	153;"	macro
+LL_GPIO_MODE_OUTPUT	./includes/stm32f0xx_ll_gpio.h	154;"	macro
 LL_GPIO_MODE_OUTPUT	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	154;"	macro
+LL_GPIO_OUTPUT_OPENDRAIN	./includes/stm32f0xx_ll_gpio.h	165;"	macro
 LL_GPIO_OUTPUT_OPENDRAIN	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	165;"	macro
+LL_GPIO_OUTPUT_PUSHPULL	./includes/stm32f0xx_ll_gpio.h	164;"	macro
 LL_GPIO_OUTPUT_PUSHPULL	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	164;"	macro
+LL_GPIO_PIN_0	./includes/stm32f0xx_ll_gpio.h	124;"	macro
 LL_GPIO_PIN_0	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	124;"	macro
+LL_GPIO_PIN_1	./includes/stm32f0xx_ll_gpio.h	125;"	macro
 LL_GPIO_PIN_1	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	125;"	macro
+LL_GPIO_PIN_10	./includes/stm32f0xx_ll_gpio.h	134;"	macro
 LL_GPIO_PIN_10	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	134;"	macro
+LL_GPIO_PIN_11	./includes/stm32f0xx_ll_gpio.h	135;"	macro
 LL_GPIO_PIN_11	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	135;"	macro
+LL_GPIO_PIN_12	./includes/stm32f0xx_ll_gpio.h	136;"	macro
 LL_GPIO_PIN_12	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	136;"	macro
+LL_GPIO_PIN_13	./includes/stm32f0xx_ll_gpio.h	137;"	macro
 LL_GPIO_PIN_13	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	137;"	macro
+LL_GPIO_PIN_14	./includes/stm32f0xx_ll_gpio.h	138;"	macro
 LL_GPIO_PIN_14	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	138;"	macro
+LL_GPIO_PIN_15	./includes/stm32f0xx_ll_gpio.h	139;"	macro
 LL_GPIO_PIN_15	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	139;"	macro
+LL_GPIO_PIN_2	./includes/stm32f0xx_ll_gpio.h	126;"	macro
 LL_GPIO_PIN_2	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	126;"	macro
+LL_GPIO_PIN_3	./includes/stm32f0xx_ll_gpio.h	127;"	macro
 LL_GPIO_PIN_3	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	127;"	macro
+LL_GPIO_PIN_4	./includes/stm32f0xx_ll_gpio.h	128;"	macro
 LL_GPIO_PIN_4	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	128;"	macro
+LL_GPIO_PIN_5	./includes/stm32f0xx_ll_gpio.h	129;"	macro
 LL_GPIO_PIN_5	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	129;"	macro
+LL_GPIO_PIN_6	./includes/stm32f0xx_ll_gpio.h	130;"	macro
 LL_GPIO_PIN_6	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	130;"	macro
+LL_GPIO_PIN_7	./includes/stm32f0xx_ll_gpio.h	131;"	macro
 LL_GPIO_PIN_7	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	131;"	macro
+LL_GPIO_PIN_8	./includes/stm32f0xx_ll_gpio.h	132;"	macro
 LL_GPIO_PIN_8	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	132;"	macro
+LL_GPIO_PIN_9	./includes/stm32f0xx_ll_gpio.h	133;"	macro
 LL_GPIO_PIN_9	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	133;"	macro
+LL_GPIO_PIN_ALL	./includes/stm32f0xx_ll_gpio.h	140;"	macro
 LL_GPIO_PIN_ALL	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	140;"	macro
+LL_GPIO_PULL_DOWN	./includes/stm32f0xx_ll_gpio.h	188;"	macro
 LL_GPIO_PULL_DOWN	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	188;"	macro
+LL_GPIO_PULL_NO	./includes/stm32f0xx_ll_gpio.h	186;"	macro
 LL_GPIO_PULL_NO	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	186;"	macro
+LL_GPIO_PULL_UP	./includes/stm32f0xx_ll_gpio.h	187;"	macro
 LL_GPIO_PULL_UP	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	187;"	macro
+LL_GPIO_ReadInputPort	./includes/stm32f0xx_ll_gpio.h	745;"	function	signature:(GPIO_TypeDef *GPIOx)
 LL_GPIO_ReadInputPort	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	745;"	function	signature:(GPIO_TypeDef *GPIOx)
+LL_GPIO_ReadOutputPort	./includes/stm32f0xx_ll_gpio.h	797;"	function	signature:(GPIO_TypeDef *GPIOx)
 LL_GPIO_ReadOutputPort	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	797;"	function	signature:(GPIO_TypeDef *GPIOx)
+LL_GPIO_ReadReg	./includes/stm32f0xx_ll_gpio.h	236;"	macro
 LL_GPIO_ReadReg	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	236;"	macro
+LL_GPIO_ResetOutputPin	./includes/stm32f0xx_ll_gpio.h	884;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
 LL_GPIO_ResetOutputPin	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	884;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+LL_GPIO_SetAFPin_0_7	./includes/stm32f0xx_ll_gpio.h	553;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Alternate)
 LL_GPIO_SetAFPin_0_7	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	553;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Alternate)
+LL_GPIO_SetAFPin_8_15	./includes/stm32f0xx_ll_gpio.h	614;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Alternate)
 LL_GPIO_SetAFPin_8_15	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	614;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Alternate)
+LL_GPIO_SetOutputPin	./includes/stm32f0xx_ll_gpio.h	855;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
 LL_GPIO_SetOutputPin	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	855;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+LL_GPIO_SetPinMode	./includes/stm32f0xx_ll_gpio.h	284;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Mode)
 LL_GPIO_SetPinMode	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	284;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Mode)
+LL_GPIO_SetPinOutputType	./includes/stm32f0xx_ll_gpio.h	352;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask, uint32_t OutputType)
 LL_GPIO_SetPinOutputType	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	352;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask, uint32_t OutputType)
+LL_GPIO_SetPinPull	./includes/stm32f0xx_ll_gpio.h	490;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Pull)
 LL_GPIO_SetPinPull	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	490;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Pull)
+LL_GPIO_SetPinSpeed	./includes/stm32f0xx_ll_gpio.h	422;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Speed)
 LL_GPIO_SetPinSpeed	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	422;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Speed)
+LL_GPIO_SPEED_FREQ_HIGH	./includes/stm32f0xx_ll_gpio.h	175;"	macro
 LL_GPIO_SPEED_FREQ_HIGH	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	175;"	macro
+LL_GPIO_SPEED_FREQ_LOW	./includes/stm32f0xx_ll_gpio.h	173;"	macro
 LL_GPIO_SPEED_FREQ_LOW	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	173;"	macro
+LL_GPIO_SPEED_FREQ_MEDIUM	./includes/stm32f0xx_ll_gpio.h	174;"	macro
 LL_GPIO_SPEED_FREQ_MEDIUM	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	174;"	macro
+LL_GPIO_SPEED_HIGH	./includes/stm32f0xx_ll_gpio.h	181;"	macro
 LL_GPIO_SPEED_HIGH	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	181;"	macro
+LL_GPIO_SPEED_LOW	./includes/stm32f0xx_ll_gpio.h	179;"	macro
 LL_GPIO_SPEED_LOW	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	179;"	macro
+LL_GPIO_SPEED_MEDIUM	./includes/stm32f0xx_ll_gpio.h	180;"	macro
 LL_GPIO_SPEED_MEDIUM	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	180;"	macro
+LL_GPIO_StructInit	./includes/stm32f0xx_ll_gpio.h	929;"	prototype	signature:(LL_GPIO_InitTypeDef *GPIO_InitStruct)
 LL_GPIO_StructInit	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	929;"	prototype	signature:(LL_GPIO_InitTypeDef *GPIO_InitStruct)
 LL_GPIO_StructInit	./stm32f0_peripheral/Src/stm32f0xx_ll_gpio.c	248;"	function	signature:(LL_GPIO_InitTypeDef *GPIO_InitStruct)
+LL_GPIO_TogglePin	./includes/stm32f0xx_ll_gpio.h	913;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
 LL_GPIO_TogglePin	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	913;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+LL_GPIO_WriteOutputPort	./includes/stm32f0xx_ll_gpio.h	786;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PortValue)
 LL_GPIO_WriteOutputPort	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	786;"	function	signature:(GPIO_TypeDef *GPIOx, uint32_t PortValue)
+LL_GPIO_WriteReg	./includes/stm32f0xx_ll_gpio.h	228;"	macro
 LL_GPIO_WriteReg	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	228;"	macro
 LL_I2C_ACK	./stm32f0_peripheral/Inc/stm32f0xx_ll_i2c.h	242;"	macro
 LL_I2C_AcknowledgeNextData	./stm32f0_peripheral/Inc/stm32f0xx_ll_i2c.h	1953;"	function	signature:(I2C_TypeDef *I2Cx, uint32_t TypeAcknowledge)
@@ -5984,13 +6072,15 @@ LSE_VALUE	./stm32f0_peripheral/Inc/stm32f0xx_ll_rcc.h	140;"	macro
 LSI_VALUE	./stm32f0_peripheral/Inc/stm32f0xx_ll_rcc.h	144;"	macro
 main	./examples/EXTI_PA0_button.c	12;"	function	signature:(void)
 main	./examples/USART_TX.c	14;"	function	signature:(void)
-main	./src/main.c	10;"	function	signature:(void)
+main	./src/main.c	72;"	function	signature:(void)
 MCLKOutput	./stm32f0_peripheral/Inc/stm32f0xx_ll_spi.h	1453;"	member	struct:__anon19
 MCUFLAGS	./Makefile	52;"	macro
 MemoryOrM2MDstAddress	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	116;"	member	struct:__anon23
 MemoryOrM2MDstDataSize	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	152;"	member	struct:__anon23
 MemoryOrM2MDstIncMode	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	140;"	member	struct:__anon23
 Minutes	./stm32f0_peripheral/Inc/stm32f0xx_ll_rtc.h	139;"	member	struct:__anon7
+Mode	./includes/stm32f0xx_ll_gpio.h	85;"	member	struct:__anon67
+Mode	./src/main.c	12;"	member	struct:__anon68	file:
 Mode	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	127;"	member	struct:__anon23
 Mode	./stm32f0_peripheral/Inc/stm32f0xx_ll_exti.h	83;"	member	struct:__anon5
 Mode	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	85;"	member	struct:__anon25
@@ -6003,9 +6093,9 @@ N	./includes/core_cm0.h	254;"	member	struct:__anon56::__anon57
 N	./includes/core_cm0.h	305;"	member	struct:__anon60::__anon61
 NbData	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	158;"	member	struct:__anon23
 NM	./Makefile	41;"	macro
-NMI_Handler	./examples/EXTI_PA0_button.c	84;"	function	signature:(void)
+NMI_Handler	./examples/EXTI_PA0_button.c	96;"	function	signature:(void)
 NMI_Handler	./examples/USART_TX.c	162;"	function	signature:(void)
-NMI_Handler	./src/main.c	82;"	function	signature:(void)
+NMI_Handler	./src/main.c	185;"	function	signature:(void)
 NonMaskableInt_IRQn	./includes/stm32f051x8.h	87;"	enumerator	enum:__anon26
 NSS	./stm32f0_peripheral/Inc/stm32f0xx_ll_spi.h	97;"	member	struct:__anon18
 NVIC	./includes/core_cm0.h	588;"	macro
@@ -6081,6 +6171,8 @@ OTYPER	./includes/stm32f051x8.h	310;"	member	struct:__anon41
 OutputBuffer	./stm32f0_peripheral/Inc/stm32f0xx_ll_dac.h	177;"	member	struct:__anon22
 OutputPolarity	./stm32f0_peripheral/Inc/stm32f0xx_ll_comp.h	153;"	member	struct:__anon24
 OutputSelection	./stm32f0_peripheral/Inc/stm32f0xx_ll_comp.h	148;"	member	struct:__anon24
+OutputType	./includes/stm32f0xx_ll_gpio.h	95;"	member	struct:__anon67
+OutputType	./src/main.c	14;"	member	struct:__anon68	file:
 OutputType	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	95;"	member	struct:__anon25
 Overrun	./stm32f0_peripheral/Inc/stm32f0xx_ll_adc.h	320;"	member	struct:__anon21
 OverSampling	./stm32f0_peripheral/Inc/stm32f0xx_ll_usart.h	118;"	member	struct:__anon3
@@ -6089,9 +6181,9 @@ OwnAddrSize	./stm32f0_peripheral/Inc/stm32f0xx_ll_i2c.h	116;"	member	struct:__an
 Parity	./stm32f0_peripheral/Inc/stm32f0xx_ll_usart.h	103;"	member	struct:__anon3
 PCLK1_Frequency	./stm32f0_peripheral/Inc/stm32f0xx_ll_rcc.h	108;"	member	struct:__anon1
 PECR	./includes/stm32f051x8.h	347;"	member	struct:__anon43
-PendSV_Handler	./examples/EXTI_PA0_button.c	96;"	function	signature:(void)
+PendSV_Handler	./examples/EXTI_PA0_button.c	108;"	function	signature:(void)
 PendSV_Handler	./examples/USART_TX.c	175;"	function	signature:(void)
-PendSV_Handler	./src/main.c	96;"	function	signature:(void)
+PendSV_Handler	./src/main.c	197;"	function	signature:(void)
 PendSV_IRQn	./includes/stm32f051x8.h	90;"	enumerator	enum:__anon26
 PeripheralMode	./stm32f0_peripheral/Inc/stm32f0xx_ll_i2c.h	85;"	member	struct:__anon2
 PeriphOrM2MSrcAddress	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	111;"	member	struct:__anon23
@@ -6099,6 +6191,8 @@ PeriphOrM2MSrcDataSize	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	146;"	member	
 PeriphOrM2MSrcIncMode	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	134;"	member	struct:__anon23
 PeriphRequest	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	166;"	member	struct:__anon23
 PERIPH_BASE	./includes/stm32f051x8.h	537;"	macro
+Pin	./includes/stm32f0xx_ll_gpio.h	82;"	member	struct:__anon67
+Pin	./src/main.c	11;"	member	struct:__anon68	file:
 Pin	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	82;"	member	struct:__anon25
 PLLDiv	./stm32f0_peripheral/Inc/stm32f0xx_ll_utils.h	115;"	member	struct:__anon16
 PLLMul	./stm32f0_peripheral/Inc/stm32f0xx_ll_utils.h	108;"	member	struct:__anon16
@@ -6112,6 +6206,8 @@ Prescaler	./stm32f0_peripheral/Inc/stm32f0xx_ll_tim.h	199;"	member	struct:__anon
 Priority	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	172;"	member	struct:__anon23
 PROJECT	./Makefile	4;"	macro
 PSC	./includes/stm32f051x8.h	461;"	member	struct:__anon49
+Pull	./includes/stm32f0xx_ll_gpio.h	100;"	member	struct:__anon67
+Pull	./src/main.c	15;"	member	struct:__anon68	file:
 Pull	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	100;"	member	struct:__anon25
 PUPDR	./includes/stm32f051x8.h	312;"	member	struct:__anon41
 PVD_IRQn	./includes/stm32f051x8.h	95;"	enumerator	enum:__anon26
@@ -7271,6 +7367,7 @@ SCB_SHCSR_SVCALLPENDED_Pos	./includes/core_cm0.h	479;"	macro
 SCB_Type	./includes/core_cm0.h	399;"	typedef	typeref:struct:__anon65
 SCR	./includes/core_cm0.h	394;"	member	struct:__anon65
 SCS_BASE	./includes/core_cm0.h	581;"	macro
+sec	./src/main.c	200;"	variable
 Seconds	./stm32f0_peripheral/Inc/stm32f0xx_ll_rtc.h	144;"	member	struct:__anon7
 SequencerDiscont	./stm32f0_peripheral/Inc/stm32f0xx_ll_adc.h	302;"	member	struct:__anon21
 SET	./includes/stm32f0xx.h	178;"	enumerator	enum:__anon53
@@ -7281,6 +7378,7 @@ SHIFT_TAB_CCxP	./stm32f0_peripheral/Inc/stm32f0xx_ll_tim.h	95;"	variable
 SHIFT_TAB_ICxx	./stm32f0_peripheral/Inc/stm32f0xx_ll_tim.h	84;"	variable
 SHIFT_TAB_OCxx	./stm32f0_peripheral/Inc/stm32f0xx_ll_tim.h	73;"	variable
 SHIFT_TAB_OISx	./stm32f0_peripheral/Inc/stm32f0xx_ll_tim.h	106;"	variable
+show_dot	./src/main.c	21;"	variable
 SHP	./includes/core_cm0.h	397;"	member	struct:__anon65
 SIZE	./Makefile	45;"	macro
 SMCR	./includes/stm32f051x8.h	453;"	member	struct:__anon49
@@ -7288,6 +7386,8 @@ SMPR	./includes/stm32f051x8.h	148;"	member	struct:__anon27
 SOURCES	./Makefile	21;"	macro
 SOURCES_C	./Makefile	20;"	macro
 SOURCES_S	./Makefile	19;"	macro
+Speed	./includes/stm32f0xx_ll_gpio.h	90;"	member	struct:__anon67
+Speed	./src/main.c	13;"	member	struct:__anon68	file:
 Speed	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	90;"	member	struct:__anon25
 SPI1	./includes/stm32f051x8.h	629;"	macro
 SPI1_BASE	./includes/stm32f051x8.h	567;"	macro
@@ -7484,9 +7584,9 @@ Standard	./stm32f0_peripheral/Inc/stm32f0xx_ll_spi.h	1441;"	member	struct:__anon
 STM32F0	./includes/stm32f0xx.h	69;"	macro
 StopBits	./stm32f0_peripheral/Inc/stm32f0xx_ll_usart.h	98;"	member	struct:__anon3
 SUCCESS	./includes/stm32f0xx.h	191;"	enumerator	enum:__anon55
-SVC_Handler	./examples/EXTI_PA0_button.c	92;"	function	signature:(void)
+SVC_Handler	./examples/EXTI_PA0_button.c	104;"	function	signature:(void)
 SVC_Handler	./examples/USART_TX.c	171;"	function	signature:(void)
-SVC_Handler	./src/main.c	92;"	function	signature:(void)
+SVC_Handler	./src/main.c	193;"	function	signature:(void)
 SVC_IRQn	./includes/stm32f051x8.h	89;"	enumerator	enum:__anon26
 SWIER	./includes/stm32f051x8.h	270;"	member	struct:__anon38
 SWTRIGR	./includes/stm32f051x8.h	220;"	member	struct:__anon34
@@ -7675,8 +7775,8 @@ SystemClock_Config	./examples/EXTI_PA0_button.c	39;"	function
 SystemClock_Config	./examples/EXTI_PA0_button.c	7;"	prototype	file:	signature:(void)
 SystemClock_Config	./examples/USART_TX.c	42;"	function
 SystemClock_Config	./examples/USART_TX.c	9;"	prototype	file:	signature:(void)
-SystemClock_Config	./src/main.c	50;"	function
-SystemClock_Config	./src/main.c	6;"	prototype	file:	signature:(void)
+SystemClock_Config	./src/main.c	117;"	function
+SystemClock_Config	./src/main.c	24;"	prototype	file:	signature:(void)
 SystemCoreClock	./src/system_stm32f0xx.c	56;"	variable
 SystemCoreClockUpdate	./includes/system_stm32f0xx.h	103;"	prototype	signature:(void)
 SystemCoreClockUpdate	./src/system_stm32f0xx.c	131;"	function	signature:(void)
@@ -7699,9 +7799,9 @@ SysTick_CTRL_ENABLE_Msk	./includes/core_cm0.h	514;"	macro
 SysTick_CTRL_ENABLE_Pos	./includes/core_cm0.h	513;"	macro
 SysTick_CTRL_TICKINT_Msk	./includes/core_cm0.h	511;"	macro
 SysTick_CTRL_TICKINT_Pos	./includes/core_cm0.h	510;"	macro
-SysTick_Handler	./examples/EXTI_PA0_button.c	101;"	function	signature:(void)
+SysTick_Handler	./examples/EXTI_PA0_button.c	112;"	function	signature:(void)
 SysTick_Handler	./examples/USART_TX.c	180;"	function	signature:(void)
-SysTick_Handler	./src/main.c	101;"	function	signature:(void)
+SysTick_Handler	./src/main.c	201;"	function	signature:(void)
 SysTick_IRQn	./includes/stm32f051x8.h	91;"	enumerator	enum:__anon26
 SysTick_LOAD_RELOAD_Msk	./includes/core_cm0.h	518;"	macro
 SysTick_LOAD_RELOAD_Pos	./includes/core_cm0.h	517;"	macro
@@ -7716,9 +7816,9 @@ TEMPSENSOR_CAL1_TEMP	./stm32f0_peripheral/Inc/stm32f0xx_ll_adc.h	210;"	macro
 TEMPSENSOR_CAL2_ADDR	./stm32f0_peripheral/Inc/stm32f0xx_ll_adc.h	209;"	macro
 TEMPSENSOR_CAL2_TEMP	./stm32f0_peripheral/Inc/stm32f0xx_ll_adc.h	211;"	macro
 TEMPSENSOR_CAL_VREFANALOG	./stm32f0_peripheral/Inc/stm32f0xx_ll_adc.h	212;"	macro
-tick	./examples/EXTI_PA0_button.c	99;"	variable
+tick	./examples/EXTI_PA0_button.c	111;"	variable
 tick	./examples/USART_TX.c	178;"	variable
-tick	./src/main.c	99;"	variable
+tick	./src/main.c	200;"	variable
 TIM1	./includes/stm32f051x8.h	628;"	macro
 TIM14	./includes/stm32f051x8.h	608;"	macro
 TIM14_BASE	./includes/stm32f051x8.h	548;"	macro
@@ -7752,6 +7852,7 @@ TIM6_BASE	./includes/stm32f051x8.h	547;"	macro
 TIM6_DAC_IRQn	./includes/stm32f051x8.h	111;"	enumerator	enum:__anon26
 TIM6_IRQHandler	./includes/stm32f051x8.h	6774;"	macro
 TIM6_IRQn	./includes/stm32f051x8.h	6762;"	macro
+time	./src/main.c	200;"	variable
 TimeFormat	./stm32f0_peripheral/Inc/stm32f0xx_ll_rtc.h	128;"	member	struct:__anon7
 TIMEOUTR	./includes/stm32f051x8.h	344;"	member	struct:__anon43
 Timing	./stm32f0_peripheral/Inc/stm32f0xx_ll_i2c.h	90;"	member	struct:__anon2
@@ -9090,8 +9191,11 @@ usart_transmit	./examples/USART_TX.c	154;"	function	signature:(char *tx)
 USART_TypeDef	./includes/stm32f051x8.h	514;"	typedef	typeref:struct:__anon51
 USART_WUSM_SUPPORT	./includes/stm32f051x8.h	5986;"	macro
 USER	./includes/stm32f051x8.h	296;"	member	struct:__anon40
-UserButton_Init	./examples/EXTI_PA0_button.c	70;"	function	signature:(void)
+UserButton_Init	./examples/EXTI_PA0_button.c	69;"	function	signature:(void)
 UserButton_Init	./examples/EXTI_PA0_button.c	9;"	prototype	file:	signature:(void)
+UserButton_Init	./src/main.c	148;"	function	signature:(void)
+UserButton_Init	./src/main.c	26;"	prototype	file:	signature:(void)
+USE_FULL_LL_DRIVER	./src/main.c	6;"	macro	file:
 UTILS_EnablePLLAndSwitchSystem	./stm32f0_peripheral/Src/stm32f0xx_ll_utils.c	137;"	prototype	file:	signature:(uint32_t SYSCLK_Frequency, LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct)
 UTILS_EnablePLLAndSwitchSystem	./stm32f0_peripheral/Src/stm32f0xx_ll_utils.c	552;"	function	file:	signature:(uint32_t SYSCLK_Frequency, LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct)
 UTILS_GetPLLOutputFrequency	./stm32f0_peripheral/Src/stm32f0xx_ll_utils.c	132;"	prototype	file:	signature:(uint32_t PLL_InputFrequency, LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct)
@@ -9405,6 +9509,7 @@ __STM32F0xx_LL_CRS_H	./stm32f0_peripheral/Inc/stm32f0xx_ll_crs.h	38;"	macro
 __STM32F0xx_LL_DAC_H	./stm32f0_peripheral/Inc/stm32f0xx_ll_dac.h	38;"	macro
 __STM32F0xx_LL_DMA_H	./stm32f0_peripheral/Inc/stm32f0xx_ll_dma.h	38;"	macro
 __STM32F0xx_LL_EXTI_H	./stm32f0_peripheral/Inc/stm32f0xx_ll_exti.h	38;"	macro
+__STM32F0xx_LL_GPIO_H	./includes/stm32f0xx_ll_gpio.h	38;"	macro
 __STM32F0xx_LL_GPIO_H	./stm32f0_peripheral/Inc/stm32f0xx_ll_gpio.h	38;"	macro
 __STM32F0xx_LL_I2C_H	./stm32f0_peripheral/Inc/stm32f0xx_ll_i2c.h	38;"	macro
 __STM32F0xx_LL_IWDG_H	./stm32f0_peripheral/Inc/stm32f0xx_ll_iwdg.h	38;"	macro

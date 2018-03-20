@@ -3,8 +3,9 @@
 #include "stm32f0xx_ll_rcc.h"
 #include "stm32f0xx_ll_system.h"
 #include "stm32f0xx_ll_exti.h"
+#define USE_FULL_LL_DRIVER
 
-char current_digits[4] = {0, 0, 0, 0};
+char current_digits[4] = {1, 9, 3, 8};
 char show_dot = 0;
 
 const int digits[10] = {0b11101011, 0b10001000, 0b10110011, 0b10111010, 0b11011000, 0b01111010, 0b01111011, 0b10101000, 0b11111011, 0b11111010, 0};
@@ -19,66 +20,69 @@ void UserButton_Init(void);
 	//~ LL_GPIO_WriteOutputPort(GPIOA, (0b0010 >> 8) | output_digits && 0b00000000000000001111111100000000);
 	//~ LL_GPIO_WriteOutputPort(GPIOA, (0b0001 >> 8) | output_digits && 0b00000000000000000000000011111111);
 //~ }
+
 void display_digit1(char the_digit)
 {
-	LL_GPIO_WriteOutputPort(GPIOA, 0b011100000000 | digits[the_digit]);
+	LL_GPIO_WriteOutputPort(GPIOB, 0b011100000000 | digits[the_digit]);
 }
 void display_digit2(char the_digit)
 {
-	LL_GPIO_WriteOutputPort(GPIOA, 0b101100000000 | digits[the_digit]);
+	LL_GPIO_WriteOutputPort(GPIOB, 0b101100000000 | digits[the_digit]);
 }
 void display_digit3(char the_digit)
 {
-	LL_GPIO_WriteOutputPort(GPIOA, 0b110100000000 | digits[the_digit]);
+	LL_GPIO_WriteOutputPort(GPIOB, 0b110100000000 | digits[the_digit]);
 }
 void display_digit4(char the_digit)
 {
-	LL_GPIO_WriteOutputPort(GPIOA, 0b111000000000 | digits[the_digit]);
+	LL_GPIO_WriteOutputPort(GPIOB, 0b111000000000 | digits[the_digit]);
 }
 void display_dot1()
 {
-	LL_GPIO_WriteOutputPort(GPIOA, 0b011100000100);
+	LL_GPIO_WriteOutputPort(GPIOB, 0b011100000100);
 }
 void display_dot2()
 {
 	if (show_dot)
-		LL_GPIO_WriteOutputPort(GPIOA, 0b101100000100);
+		LL_GPIO_WriteOutputPort(GPIOB, 0b101100000100);
 	else
-		LL_GPIO_WriteOutputPort(GPIOA, 0b101100000000);
+		LL_GPIO_WriteOutputPort(GPIOB, 0b101100000000);
 }
 void display_dot3()
 {
-	LL_GPIO_WriteOutputPort(GPIOA, 0b110100000100);
+	LL_GPIO_WriteOutputPort(GPIOB, 0b110100000100);
 }
 void display_dot4()
 {
-	LL_GPIO_WriteOutputPort(GPIOA, 0b111000000100);
+	LL_GPIO_WriteOutputPort(GPIOB, 0b111000000100);
 }
 
 int main(void)
 {
         SystemClock_Config();
-        //~ LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC);
-		LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
-
-        //~ LL_GPIO_SetPinMode(GPIOC, LL_GPIO_PIN_9, LL_GPIO_MODE_OUTPUT);
-        //~ LL_GPIO_SetPinMode(GPIOC, LL_GPIO_PIN_8, LL_GPIO_MODE_OUTPUT);
+        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
+        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
+		LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC);
+		
+        LL_GPIO_SetPinMode(GPIOC, LL_GPIO_PIN_8, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOC, LL_GPIO_PIN_9, LL_GPIO_MODE_OUTPUT);
         
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_0, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_1, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_2, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_3, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_4, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_5, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_6, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_7, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_8, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_9, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_10, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_11, LL_GPIO_MODE_OUTPUT);
         
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_0, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_1, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_2, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_3, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_4, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_5, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_6, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_7, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_8, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_9, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_10, LL_GPIO_MODE_OUTPUT);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_11, LL_GPIO_MODE_OUTPUT);
+		
 
-        //~ UserButton_Init();
+        UserButton_Init();
 
         while (1);
         return 0;
@@ -130,16 +134,39 @@ SystemClock_Config() {
 }
 
 void UserButton_Init(void) {
+		//~ LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA); 
+		//~ LL_GPIO_InitTypeDef GPIO_InitStruct; 
+		//~ LL_GPIO_StructInit(&GPIO_InitStruct); 
+		//~ GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT; 
+		//~ GPIO_InitStruct.Pin = LL_GPIO_PIN_0; 
+		//~ GPIO_InitStruct.Pull = LL_GPIO_PULL_NO; 
+		//~ LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+		
         /* Enable the BUTTON Clock */
         LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
-        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_12, LL_GPIO_MODE_INPUT);
-        LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_12, LL_GPIO_PULL_NO);
+        
+        
+        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_0, LL_GPIO_MODE_INPUT);
+        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_2, LL_GPIO_MODE_INPUT);
+        LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_0, LL_GPIO_PULL_NO);
+        LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_2, LL_GPIO_PULL_DOWN);
+        
+        
         LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
-        LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE12);
-        LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_12);
-        LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_12);
+        
+        LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE0);
+        LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE2);
+        
+        
+        LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_0);
+        LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_0);
         NVIC_EnableIRQ(EXTI0_1_IRQn);
         NVIC_SetPriority(EXTI0_1_IRQn, 0);
+        
+        LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_2);
+        LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_2);
+        NVIC_EnableIRQ(EXTI2_3_IRQn);
+        NVIC_SetPriority(EXTI2_3_IRQn, 0);
 }
 
 void
@@ -223,18 +250,22 @@ void SysTick_Handler(void) {
 //button interrupt handler
 void EXTI0_1_IRQHandler(void)
 {
-        LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_9);
         LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_8);
-        
-        
-        LL_GPIO_TogglePin(GPIOA, LL_GPIO_PIN_8);
-        LL_GPIO_TogglePin(GPIOA, LL_GPIO_PIN_9);
-        //~ LL_GPIO_TogglePin(GPIOA, LL_GPIO_PIN_10);
-        //~ LL_GPIO_TogglePin(GPIOA, LL_GPIO_PIN_11);
-        
-        //~ LL_GPIO_WriteOutputPort(GPIOA, 0b111100001100);
-        
-        
+        //~ LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_9);
         //don't forget to add this line at the end
         LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);
+}
+
+int t = 0;
+void EXTI2_3_IRQHandler(void)
+{
+	if (t > 2000)
+	{
+        //~ LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_8);
+        LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_9);
+        //~ //don't forget to add this line at the end
+        LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_2);
+        t = 0;
+	}
+	t++;
 }

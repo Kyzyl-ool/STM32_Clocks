@@ -18,10 +18,8 @@ detect_indent_width=false
 indent_mode=2
 
 [project]
-name=Clocks
-base_path=/Users/kyzyl-ool/Desktop/STM32/stm32f0_ARM/Clocks/
-description=
-file_patterns=
+name=STM32_Clocks
+base_path=/Users/kyzyl-ool/Documents/GitHub/STM32/STM32_Clocks
 
 [long line marker]
 long_line_behaviour=1
@@ -40,8 +38,3 @@ ignored_dirs_patterns=.*;CVS;
 ignored_file_patterns=*.o;*.obj;*.a;*.lib;*.so;*.dll;*.lo;*.la;*.class;*.jar;*.pyc;*.mo;*.gmo;
 generate_tag_prefs=0
 external_dirs=
-
-[build-menu]
-NF_00_LB=_Make
-NF_00_CM=make
-NF_00_WD=
