@@ -4,10 +4,13 @@
 #include "stm32f0xx_ll_system.h"
 #include "stm32f0xx_ll_exti.h"
 
-char current_digits[4] = {0, 0, 0, 0};
+char current_digits[4] = {1, 2, 0, 0};
+char alarm_time[4] = {1, 2, 0, 0};
 char visible[4] = {1, 1, 1, 1};
 char beaming = 0;
 char show_dot2 = 1;
+char alarm = 0;
+char alarm_stopped = 0;
 
 const int digits[10] = {0b11101011, 0b10001000, 0b10110011, 0b10111010, 0b11011000, 0b01111010, 0b01111011, 0b10101000, 0b11111011, 0b11111010, 0};
 void SystemClock_Config(void);
@@ -80,6 +83,7 @@ int main(void)
         LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_9, LL_GPIO_MODE_OUTPUT);
         LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_10, LL_GPIO_MODE_OUTPUT);
         LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_11, LL_GPIO_MODE_OUTPUT);
+        LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_12, LL_GPIO_MODE_OUTPUT);
         
 		
 
@@ -192,7 +196,18 @@ void SysTick_Handler(void) {
         time++;
         sec++;
         
+        if (alarm_time[0] == current_digits[0] && alarm_time[1] == current_digits[1] && alarm_time[2] == current_digits[2] && alarm_time[3] == current_digits[3])
+		{
+			alarm = 1;
+		}
+		else
+		{
+			alarm_stopped = 0;
+			alarm = 0;
+		}
         
+        if (alarm && time % 5 == 0 && !alarm_stopped)
+			LL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_12);
         
         if (tick == count && visible[0])
         {
@@ -248,7 +263,7 @@ void SysTick_Handler(void) {
 			show_dot2++;
 			show_dot2 %= 2;
 			
-			
+			if (!alarm && !alarm_stopped) LL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_12);
 		}
 		
 		if (sec == 500)
@@ -262,7 +277,6 @@ void SysTick_Handler(void) {
 					default: break;
 				}
 			}
-		
 		
 }
 
@@ -301,6 +315,7 @@ void EXTI0_1_IRQHandler(void)
 		
 	}
 	
+	alarm_stopped = 1;
 	
 	//~ LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_8);
 	//don't forget to add this line at the end
