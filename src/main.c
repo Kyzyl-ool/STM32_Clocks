@@ -5,12 +5,13 @@
 #include "stm32f0xx_ll_exti.h"
 
 char current_digits[4] = {1, 2, 0, 0};
-char alarm_time[4] = {1, 2, 0, 0};
+char alarm_time[4] = {1, 3, 0, 0};
 char visible[4] = {1, 1, 1, 1};
 char beaming = 0;
 char show_dot2 = 1;
 char alarm = 0;
 char alarm_stopped = 0;
+char setting_alarm = 0;
 
 const int digits[10] = {0b11101011, 0b10001000, 0b10110011, 0b10111010, 0b11011000, 0b01111010, 0b01111011, 0b10101000, 0b11111011, 0b11111010, 0};
 void SystemClock_Config(void);
@@ -153,14 +154,17 @@ void UserButton_Init(void) {
         
         LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_0, LL_GPIO_MODE_INPUT);
         LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_2, LL_GPIO_MODE_INPUT);
+        LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_4, LL_GPIO_MODE_INPUT);
         LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_0, LL_GPIO_PULL_NO);
         LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_2, LL_GPIO_PULL_DOWN);
+        LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_4, LL_GPIO_PULL_DOWN);
         
         
         LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
         
         LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE0);
         LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE2);
+        LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE4);
         
         
         LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_0);
@@ -172,6 +176,11 @@ void UserButton_Init(void) {
         LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_2);
         NVIC_EnableIRQ(EXTI2_3_IRQn);
         NVIC_SetPriority(EXTI2_3_IRQn, 0);
+        
+        LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_4);
+        LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_4);
+        NVIC_EnableIRQ(EXTI4_15_IRQn);
+        NVIC_SetPriority(EXTI4_15_IRQn, 0);
 }
 
 void
@@ -209,26 +218,53 @@ void SysTick_Handler(void) {
         if (alarm && time % 5 == 0 && !alarm_stopped)
 			LL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_12);
         
-        if (tick == count && visible[0])
+        if (setting_alarm)
         {
-			display_digit1(current_digits[0]);
-        }
-        else if (tick == 2*count && visible[1])
-        {
-			display_digit2(current_digits[1]);
+			if (tick == count && visible[0])
+			{
+				display_digit1(alarm_time[0]);
+			}
+			else if (tick == 2*count && visible[1])
+			{
+				display_digit2(alarm_time[1]);
+			}
+			else if (tick == 3*count && visible[2])
+			{
+				display_digit3(alarm_time[2]);
+			}
+			else if (tick == 4*count && visible[3])
+			{
+				display_digit4(alarm_time[3]);
+			}
+			else if (tick == 5*count)
+			{
+				display_dot2();
+				tick = 0;
+			}
 		}
-		else if (tick == 3*count && visible[2])
+		else
 		{
-			display_digit3(current_digits[2]);
-		}
-		else if (tick == 4*count && visible[3])
-		{
-			display_digit4(current_digits[3]);
-		}
-		else if (tick == 5*count)
-		{
-			display_dot2();
-			tick = 0;
+			if (tick == count && visible[0])
+			{
+				display_digit1(current_digits[0]);
+			}
+			else if (tick == 2*count && visible[1])
+			{
+				display_digit2(current_digits[1]);
+			}
+			else if (tick == 3*count && visible[2])
+			{
+				display_digit3(current_digits[2]);
+			}
+			else if (tick == 4*count && visible[3])
+			{
+				display_digit4(current_digits[3]);
+			}
+			else if (tick == 5*count)
+			{
+				display_dot2();
+				tick = 0;
+			}
 		}
 		
 		if (time == 1000*60)
@@ -263,7 +299,7 @@ void SysTick_Handler(void) {
 			show_dot2++;
 			show_dot2 %= 2;
 			
-			if (!alarm && !alarm_stopped) LL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_12);
+			//~ if (!alarm && !alarm_stopped) LL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_12);
 		}
 		
 		if (sec == 500)
@@ -284,35 +320,69 @@ void SysTick_Handler(void) {
 //button interrupt handler
 void EXTI0_1_IRQHandler(void)
 {
-	
-	switch (beaming)
+	if (setting_alarm)
 	{
-		case 1:
+		switch (beaming)
 		{
-			current_digits[0]++;
-			current_digits[0] %= 10;
-			break;
+			case 1:
+			{
+				alarm_time[0]++;
+				alarm_time[0] %= 10;
+				break;
+			}
+			case 2:
+			{
+				alarm_time[1]++;
+				alarm_time[1] %= 10;
+				break;
+			}
+			case 3:
+			{
+				alarm_time[2]++;
+				alarm_time[2] %= 7;
+				break;
+			}
+			case 4:
+			{
+				alarm_time[3]++;
+				alarm_time[3] %= 10;
+				break;
+			}
+			default: break;
+			
 		}
-		case 2:
+	}
+	else
+	{
+		switch (beaming)
 		{
-			current_digits[1]++;
-			current_digits[1] %= 10;
-			break;
+			case 1:
+			{
+				current_digits[0]++;
+				current_digits[0] %= 10;
+				break;
+			}
+			case 2:
+			{
+				current_digits[1]++;
+				current_digits[1] %= 10;
+				break;
+			}
+			case 3:
+			{
+				current_digits[2]++;
+				current_digits[2] %= 7;
+				break;
+			}
+			case 4:
+			{
+				current_digits[3]++;
+				current_digits[3] %= 10;
+				break;
+			}
+			default: break;
+			
 		}
-		case 3:
-		{
-			current_digits[2]++;
-			current_digits[2] %= 7;
-			break;
-		}
-		case 4:
-		{
-			current_digits[3]++;
-			current_digits[3] %= 10;
-			break;
-		}
-		default: break;
-		
 	}
 	
 	alarm_stopped = 1;
@@ -340,4 +410,10 @@ void EXTI2_3_IRQHandler(void)
 	//~ SysTick_Handler();
 	//~ beaming %= 6;
 	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_2);
+}
+
+void EXTI4_15_IRQHandler(void)
+{
+	setting_alarm = ~setting_alarm;
+	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_4);
 }
